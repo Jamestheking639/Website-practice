@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SignalScope Intelligence</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #071522;
+  --panel: #102b3c;
+  --teal: #62e1cf;
+  --white: #f4f8fb;
+  --muted: #afc0cd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+header {
+  padding: 18px 0;
+  border-bottom: 1px solid #263b4a;
+  background: #081a28;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.logo {
+  width: 43px;
+  height: 43px;
+  border: 2px solid var(--teal);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--teal);
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.brand small {
+  display: block;
+  color: var(--teal);
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+nav {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+nav a:hover {
+  color: var(--teal);
+}
+
+.hero {
+  padding: 85px 0;
+  background:
+    radial-gradient(ellipse at top right, #164052, transparent 60%),
+    var(--bg);
+}
+
+.eyebrow {
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(38px, 7vw, 67px);
+  line-height: 1.1;
+  margin: 22px 0;
+  letter-spacing: -2px;
+}
+
+h1 span {
+  color: var(--teal);
+}
+
+.hero p {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 18px;
+  margin: 20px 8px 0 0;
+  border-radius: 6px;
+  background: var(--teal);
+  color: #071522;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid var(--teal);
+  cursor: pointer;
+}
+
+.button.outline {
+  background: transparent;
+  color: var(--white);
+}
+
+section {
+  padding: 65px 0;
+}
+
+.alt {
+  background: #091c2a;
+}
+
+.section-label {
+  color: var(--teal);
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+h2 {
+  font-size: clamp(28px, 5vw, 40px);
+  margin: 8px 0 15px;
+}
+
+.section-intro {
+  color: var(--muted);
+  max-width: 650px;
+  margin-bottom: 28px;
+}
+
+.samples, .features, .prices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid #294353;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cover {
+  min-height: 285px;
+  padding: 22px;
+  background: linear-gradient(145deg, #153b4b, #071522);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover:after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 1px solid #62e1cf55;
+  border-radius: 50%;
+  right: -70px;
+  top: 65px;
+  box-shadow: 0 0 0 25px #62e1cf0b,
+              0 0 0 50px #62e1cf08;
+}
+
+.cover.gold {
+  background: linear-gradient(145deg, #463c2b, #071522);
+}
+
+.cover.purple {
+  background: linear-gradient(145deg, #302e54, #071522);
+}
+
+.cover-brand, .cover-title, .cover-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.cover-brand {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: var(--teal);
+}
+
+.cover-title small {
+  color: var(--teal);
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.gold .cover-title small {
+  color: #f0c98b;
+}
+
+.purple .cover-title small {
+  color: #b4baff;
+}
+
+.cover-title h3 {
+  font-size: 27px;
+  line-height: 1.2;
+  margin: 12px 0;
+}
+
+.cover-title p {
+  color: #bdcbd4;
+  font-size: 12px;
+}
+
+.cover-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #9aafbd;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.cover-footer strong {
+  font-size: 23px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.card-body p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.card-body .button {
+  margin-top: 15px;
+}
+
+.feature, .price-card {
+  padding: 23px;
+  background: var(--panel);
+  border: 1px solid #294353;
+  border-radius: 10px;
+}
+
+.feature h3, .price-card h3 {
+  margin: 12px 0;
+}
+
+.feature p, .price-card p,
+.price-card li {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.feature-number {
+  color: var(--teal);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.price {
+  color: var(--teal);
+  font-size: 36px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.price-card ul {
+  padding-left: 18px;
+  margin-top: 15px;
+}
+
+.price-card li {
+  margin-bottom: 8px;
+}
+
+.featured {
+  border-color: var(--teal);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.contact-layout p {
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+form {
+  background: var(--panel);
+  padding: 24px;
+  border: 1px solid #294353;
+  border-radius: 10px;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  margin: 14px 0 6px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #385364;
+  background: #071522;
+  color: white;
+  font: inherit;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+form .button {
+  width: 100%;
+}
+
+.note {
+  font-size: 11px;
+  color: #91a7b7;
+  margin-top: 18px;
+}
+
+footer {
+  padding: 25px 0;
+  border-top: 1px solid #263b4a;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#messageBox {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  background: #153b4b;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  .samples, .features, .prices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .samples, .features, .prices {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 60px 0;
+  }
+
+  nav {
+    gap: 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="noname.html">Home</a> |
+  <a href="noname(1).html">Services</a> |
+  <a href="noname(2).html">Reports</a> |
+  <a href="noname(3).html">About</a> |
+  <a href="noname(4).html">Contact</a>
+</nav>
+<hr>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <div class="logo">S</div>
+      <div>
+        SignalScope
+        <small>INTELLIGENCE</small>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#samples">Samples</a>
+      <a href="#approach">Our approach</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="container">
+    <div class="eyebrow">Independent competitor intelligence</div>
+
+    <h1>
+      See the market clearly.<br>
+      <span>Decide with confidence.</span>
+    </h1>
+
+    <p>
+      SignalScope turns public information into structured
+      competitor intelligence, helping businesses understand
+      positioning, messaging, strategy and their competitive market.
+    </p>
+
+    <a class="button" href="#samples">Explore sample reports ↓</a>
+    <a class="button outline" href="#services">Our services</a>
+  </div>
+</section>
+
+<section id="samples">
+  <div class="container">
+    <div class="section-label">Selected work</div>
+    <h2>Sample intelligence reports</h2>
+
+    <p class="section-intro">
+      Explore our sample dossiers to see how public-source
+      research can be organised into structured business insight.
+    </p>
+
+    <div class="samples">
+
+      <article class="card">
+        <div class="cover">
+          <div class="cover-brand">◇ SIGNALSCOPE INTELLIGENCE</div>
+          <div class="cover-title">
+            <small>COMPETITOR DOSSIER</small>
+            <h3>ChatGPT Competitor Intelligence</h3>
+            <p>A structured intelligence profile of ChatGPT.</p>
+          </div>
+          <div class="cover-footer">
+            <span>PUBLIC-SOURCE RESEARCH<br>STRATEGIC INTELLIGENCE</span>
+            <strong>01</strong>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>ChatGPT Dossier</h3>
+          <p>
+            An example of competitor profiling, positioning
+            analysis and evidence-led observations.
+          </p>
+          <button class="button" onclick="choosePDF('ChatGPT')">
+            Open sample PDF ↗
+          </button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="cover gold">
+          <div class="cover-brand">◇ SIGNALSCOPE INTELLIGENCE</div>
+          <div class="cover-title">
+            <small>COMPETITOR DOSSIER</small>
+            <h3>Jasper AI Competitor Intelligence</h3>
+            <p>A structured intelligence profile of Jasper AI.</p>
+          </div>
+          <div class="cover-footer">
+            <span>PUBLIC-SOURCE RESEARCH<br>STRATEGIC INTELLIGENCE</span>
+            <strong>02</strong>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>Jasper AI Dossier</h3>
+          <p>
+            A matched-format sample examining Jasper AI's
+            positioning and competitive approach.
+          </p>
+          <button class="button" onclick="choosePDF('Jasper AI')">
+            Open sample PDF ↗
+          </button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="cover purple">
+          <div class="cover-brand">◇ SIGNALSCOPE INTELLIGENCE</div>
+          <div class="cover-title">
+            <small>COMPARATIVE ANALYSIS</small>
+            <h3>ChatGPT vs Jasper AI</h3>
+            <p>A comparative strategic intelligence dossier.</p>
+          </div>
+          <div class="cover-footer">
+            <span>PUBLIC-SOURCE RESEARCH<br>STRATEGIC INTELLIGENCE</span>
+            <strong>03</strong>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>Comparative Dossier</h3>
+          <p>
+            A comparison of strategic approaches, differences
+            and potential business implications.
+          </p>
+          <button class="button" onclick="choosePDF('Comparison')">
+            Open sample PDF ↗
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <div id="messageBox">
+      <strong>Attach your sample PDF</strong>
+      <p id="pdfInstruction"></p>
+      <input type="file" id="pdfPicker" accept=".pdf,application/pdf">
+      <button class="button" onclick="openSelectedPDF()">
+        Open selected PDF
+      </button>
+      <p class="note">
+        Choose the matching report PDF from your phone.
+        This temporary file selection is not uploaded to a server.
+      </p>
+    </div>
+
+    <p class="note">
+      These sample covers demonstrate our report design.
+      Findings in a report should always be considered alongside
+      its scope, evidence and source dates.
+    </p>
+  </div>
+</section>
+
+<section class="alt" id="approach">
+  <div class="container">
+    <div class="section-label">The SignalScope standard</div>
+    <h2>Clarity over noise.</h2>
+    <p class="section-intro">
+      Good intelligence separates what is known from what is
+      inferred and connects evidence to decisions.
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-number">01 / EVIDENCE</div>
+        <h3>Public-source research</h3>
+        <p>
+          Research built around accessible public information
+          and traceable sources.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-number">02 / ANALYSIS</div>
+        <h3>Clear interpretation</h3>
+        <p>
+          Observed facts, analysis and hypotheses are
+          distinguished instead of being mixed together.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-number">03 / ACTION</div>
+        <h3>Strategic takeaways</h3>
+        <p>
+          Findings are organised to help readers understand
+          competitors and identify useful next questions.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-label">Research services</div>
+    <h2>Choose your level of insight.</h2>
+    <p class="section-intro">
+      Proposed starting prices in USD. Final pricing depends
+      on the agreed research scope and deliverables.
+    </p>
+
+    <div class="prices">
+      <div class="price-card">
+        <div class="section-label">QUICK ORIENTATION</div>
+        <div class="price">$49</div>
+        <h3>Intelligence Snapshot</h3>
+        <p>A concise introduction to one competitor.</p>
+        <ul>
+          <li>One company or product</li>
+          <li>Positioning observations</li>
+          <li>Selected public sources</li>
+          <li>Concise findings summary</li>
+        </ul>
+        <a class="button outline" href="#contact">Make an enquiry</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="section-label">DEEPER UNDERSTANDING</div>
+        <div class="price">$149</div>
+        <h3>Competitor Intelligence Report</h3>
+        <p>A structured profile of a competitor.</p>
+        <ul>
+          <li>Defined research scope</li>
+          <li>Messaging and positioning</li>
+          <li>Product observations</li>
+          <li>Evidence-led takeaways</li>
+        </ul>
+        <a class="button" href="#contact">Make an enquiry</a>
+      </div>
+
+      <div class="price-card">
+        <div class="section-label">STRATEGIC COMPARISON</div>
+        <div class="price">$349</div>
+        <h3>Strategic Intelligence Dossier</h3>
+        <p>A tailored investigation for a defined decision.</p>
+        <ul>
+          <li>Multiple competitors as scoped</li>
+          <li>Comparative analysis</li>
+          <li>Strategic implications</li>
+          <li>Prioritised recommendations</li>
+        </ul>
+        <a class="button outline" href="#contact">Make an enquiry</a>
+      </div>
+    </div>
+
+    <p class="note">
+      These are proposed starting prices, not binding quotes.
+      Agree on scope and deliverables before paid work begins.
+    </p>
+  </div>
+</section>
+
+<section class="alt" id="contact">
+  <div class="container contact-layout">
+    <div>
+      <div class="section-label">Start a conversation</div>
+      <h2>What do you need to understand?</h2>
+      <p>
+        Tell us which company, competitor or market question
+        you want to investigate.
+      </p>
+      <p>
+        <strong>Typical requests</strong><br>
+        Competitor positioning<br>
+        Product and messaging comparisons<br>
+        Market-entry research<br>
+        Strategic landscape reviews
+      </p>
+    </div>
+
+    <form id="contactForm">
+      <label for="name">Your name</label>
+      <input id="name" required placeholder="Your name">
+
+      <label for="email">Your email</label>
+      <input id="email" type="email" required placeholder="you@example.com">
+
+      <label for="company">Company or competitor</label>
+      <input id="company" placeholder="Company name">
+
+      <label for="question">Your research question</label>
+      <textarea id="question" required
+        placeholder="What would you like to understand?"></textarea>
+
+      <button class="button" type="submit">Prepare email enquiry ↗</button>
+
+      <p class="note">
+        This form opens your email application. It does not
+        save submissions or send them to a website server.
+      </p>
+      <div id="formMessage" class="note"></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span>© <span id="year"></span> SignalScope Intelligence</span>
+    <span>Evidence-led research · Strategic clarity</span>
+  </div>
+</footer>
+
+<script>
+let currentReport = "";
+
+const reportNames = {
+  "ChatGPT": "ChatGPT Competitor Intelligence Dossier PDF",
+  "Jasper AI": "Jasper AI Competitor Intelligence Dossier PDF",
+  "Comparison": "ChatGPT vs Jasper AI Comparative Dossier PDF"
+};
+
+function choosePDF(report) {
+  currentReport = report;
+
+  document.getElementById("pdfInstruction").textContent =
+    "Select the file for: " + reportNames[report] +
+    ". You must have downloaded that PDF onto your phone first.";
+
+  document.getElementById("messageBox").style.display = "block";
+
+  document.getElementById("messageBox").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+function openSelectedPDF() {
+  const picker = document.getElementById("pdfPicker");
+
+  if (!picker.files || !picker.files[0]) {
+    alert("Please select the matching PDF file first.");
+    return;
+  }
+
+  const file = picker.files[0];
+
+  if (!file.name.toLowerCase().endsWith(".pdf")) {
+    alert("Please select a PDF file.");
+    return;
+  }
+
+  const pdfURL = URL.createObjectURL(file);
+  window.open(pdfURL, "_blank");
+
+  setTimeout(function() {
+    URL.revokeObjectURL(pdfURL);
+  }, 60000);
+}
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+document.getElementById("contactForm").addEventListener(
+  "submit",
+  function(event) {
+    event.preventDefault();
+
+    const businessEmail = "YOUR_EMAIL@example.com";
+
+    if (businessEmail === "YOUR_EMAIL@example.com") {
+      document.getElementById("formMessage").textContent =
+        "Website ready! Replace YOUR_EMAIL@example.com in the code with your real business email before using this form.";
+      return;
+    }
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const company = document.getElementById("company").value;
+    const question = document.getElementById("question").value;
+
+    const subject = encodeURIComponent(
+      "SignalScope Intelligence Enquiry"
+    );
+
+    const body = encodeURIComponent(
+      "Name: " + name +
+      "\nEmail: " + email +
+      "\nCompany: " + company +
+      "\n\nResearch question:\n" + question
+    );
+
+    window.location.href =
+      "mailto:" + businessEmail +
+      "?subject=" + subject +
+      "&body=" + body;
+  }
+);
+</script>
+
+</body>
+</html>

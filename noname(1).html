@@ -1,0 +1,824 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>FUTA Survival Agency | Premium Student Solutions</title>
+
+<style>
+:root {
+  --navy: #101827;
+  --navy2: #19263b;
+  --orange: #ff9f43;
+  --cream: #f7f4ed;
+  --white: #ffffff;
+  --muted: #aeb8c8;
+  --green: #b7f7c4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  line-height: 1.65;
+}
+a { text-decoration: none; color: inherit; }
+button { font: inherit; cursor: pointer; }
+.container { width: min(1120px, 90%); margin: auto; }
+
+/* NAVIGATION */
+header {
+  background: var(--navy);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #ffffff16;
+}
+.nav {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.brand span { color: var(--orange); }
+.brand small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+nav { display: flex; align-items: center; gap: 23px; }
+nav a { font-size: 12px; color: #e1e6ee; }
+nav a:hover { color: var(--orange); }
+.nav-cta {
+  background: var(--orange);
+  color: var(--navy);
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+.menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid #ffffff50;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+/* HERO */
+.hero {
+  background:
+    radial-gradient(ellipse at 85% 25%, #ff9f4322, transparent 38%),
+    var(--navy);
+  color: white;
+  padding: 88px 0 82px;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 60px;
+  align-items: center;
+}
+.eyebrow {
+  display: inline-block;
+  color: var(--orange);
+  border: 1px solid #ff9f4355;
+  background: #ff9f4310;
+  border-radius: 30px;
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(38px, 6vw, 66px);
+  line-height: 1.06;
+  letter-spacing: -2.8px;
+  margin: 23px 0;
+}
+h1 span { color: var(--orange); }
+.hero p {
+  color: #c3ccda;
+  max-width: 520px;
+  font-size: 15px;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.btn {
+  display: inline-block;
+  padding: 13px 18px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 12px;
+  border: 1px solid transparent;
+  transition: .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-orange { background: var(--orange); color: var(--navy); }
+.btn-outline { border-color: #ffffff55; color: white; }
+.trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 32px;
+  color: #d1d9e4;
+  font-size: 11px;
+}
+.trust-row span::before {
+  content: "✓ ";
+  color: var(--green);
+  font-weight: 900;
+}
+.hero-card {
+  background: #ffffff09;
+  border: 1px solid #ffffff22;
+  border-radius: 15px;
+  padding: 25px;
+  transform: rotate(1deg);
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--muted);
+  padding-bottom: 17px;
+  border-bottom: 1px solid #ffffff20;
+}
+.live-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: 6px;
+}
+.hero-card h3 { margin: 22px 0 6px; font-size: 22px; }
+.hero-card > p { font-size: 12px; }
+.price-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #ffffff17;
+  padding: 13px 0;
+  font-size: 12px;
+}
+.price-line strong { color: var(--orange); white-space: nowrap; }
+.card-note {
+  background: #ff9f4315;
+  border-radius: 7px;
+  padding: 12px;
+  margin-top: 18px;
+  font-size: 11px;
+  color: #ffe0b9;
+}
+
+/* GENERAL SECTIONS */
+section { padding: 80px 0; }
+.section-head { max-width: 650px; margin-bottom: 36px; }
+.kicker {
+  color: #c16b14;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
+  letter-spacing: -1.3px;
+  margin: 10px 0 14px;
+}
+.section-head p { color: #647083; font-size: 14px; }
+
+/* SERVICES */
+.services { background: var(--cream); }
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+.service {
+  background: white;
+  border: 1px solid #e7e4dc;
+  padding: 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  transition: .2s;
+}
+.service:hover {
+  transform: translateY(-5px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 30px #1018270a;
+}
+.service-icon {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  background: #fff0dd;
+  border-radius: 9px;
+  font-size: 23px;
+  margin-bottom: 18px;
+}
+.service h3 { font-size: 17px; margin-bottom: 8px; }
+.service p { font-size: 12px; color: #6c7788; }
+.service-bottom {
+  margin-top: auto;
+  padding-top: 22px;
+}
+.price { font-size: 21px; font-weight: 900; letter-spacing: -.5px; }
+.price small { font-size: 10px; color: #7a8493; font-weight: 500; }
+.service button {
+  width: 100%;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 14px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.service button:hover { background: #283b59; }
+.disclaimer {
+  margin-top: 22px;
+  background: #fff0dd;
+  border: 1px solid #f4d7b0;
+  padding: 14px 16px;
+  border-radius: 7px;
+  color: #70471d;
+  font-size: 11px;
+}
+
+/* PREMIUM MEMBERSHIP */
+.premium { background: var(--navy); color: white; }
+.premium-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 55px;
+}
+.premium p { color: #bbc5d4; font-size: 14px; }
+.premium-list { list-style: none; margin-top: 22px; }
+.premium-list li { padding: 7px 0; font-size: 13px; }
+.premium-list li::before { content: "✦ "; color: var(--orange); }
+.membership {
+  background: var(--navy2);
+  border: 1px solid #ffffff25;
+  border-radius: 12px;
+  padding: 28px;
+}
+.membership .label {
+  font-size: 10px;
+  color: var(--orange);
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+.membership h3 { font-size: 25px; margin: 9px 0; }
+.membership .big-price { font-size: 38px; font-weight: 900; margin: 16px 0 3px; }
+.membership .big-price small { font-size: 11px; color: var(--muted); }
+.membership hr { border: 0; border-top: 1px solid #ffffff20; margin: 20px 0; }
+.membership button {
+  width: 100%; border: none;
+  padding: 13px; border-radius: 5px;
+  background: var(--orange); font-weight: 900;
+  margin-top: 20px;
+}
+
+/* TESTIMONIALS */
+.reviews { background: #fff; }
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.review {
+  border: 1px solid #e9e7e1;
+  padding: 22px;
+  border-radius: 8px;
+}
+.stars { color: #df8a20; letter-spacing: 3px; }
+.review p { font-size: 13px; margin: 12px 0 18px; }
+.review strong { font-size: 11px; }
+.review small { display: block; color: #7d8795; font-size: 10px; }
+
+/* FAQ */
+.faq { background: var(--cream); }
+.faq-item {
+  border-bottom: 1px solid #dedbd3;
+  padding: 18px 0;
+}
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+}
+.faq-item p { color: #657082; font-size: 12px; padding-top: 12px; }
+
+/* CTA */
+.cta {
+  background: var(--orange);
+  padding: 55px 0;
+}
+.cta-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+.cta h2 { margin: 0 0 8px; font-size: 30px; }
+.cta p { font-size: 13px; }
+.cta .btn { background: var(--navy); color: white; white-space: nowrap; }
+
+footer { background: #0b111d; color: white; padding: 38px 0 20px; }
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding-bottom: 27px;
+}
+footer p { color: #a9b3c3; font-size: 11px; }
+footer .footer-brand { font-size: 16px; font-weight: 900; margin-bottom: 8px; }
+footer .footer-brand span { color: var(--orange); }
+.footer-bottom {
+  border-top: 1px solid #ffffff1a;
+  padding-top: 17px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: #8f9aab;
+}
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 150px);
+  background: var(--navy);
+  color: white;
+  padding: 16px 20px;
+  width: min(400px, 90%);
+  border: 1px solid #ff9f4380;
+  border-radius: 9px;
+  z-index: 99;
+  box-shadow: 0 10px 40px #0003;
+  font-size: 13px;
+  transition: transform .3s;
+}
+.toast.show { transform: translate(-50%, 0); }
+.toast strong { color: var(--orange); display: block; margin-bottom: 4px; }
+
+@media (max-width: 800px) {
+  .hero-grid, .premium-grid { grid-template-columns: 1fr; gap: 35px; }
+  .hero { padding: 60px 0; }
+  .hero-card { max-width: 500px; transform: none; }
+  .service-grid { grid-template-columns: repeat(2, 1fr); }
+  .review-grid { grid-template-columns: 1fr; }
+  .review { padding: 18px; }
+  .cta-inner { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 560px) {
+  .nav { min-height: 68px; flex-wrap: wrap; }
+  .menu-btn { display: block; }
+  nav {
+    display: none;
+    width: 100%;
+    padding: 0 0 17px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  nav.open { display: flex; }
+  nav a { padding: 11px 0; }
+  nav .nav-cta { text-align: center; margin-top: 8px; }
+  h1 { letter-spacing: -1.7px; }
+  section { padding: 58px 0; }
+  .service-grid { grid-template-columns: 1fr; }
+  .service { min-height: 225px; }
+  .trust-row { gap: 10px; }
+  .footer-bottom { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="noname.html">Home</a> |
+  <a href="noname(1).html">Services</a> |
+  <a href="noname(2).html">Reports</a> |
+  <a href="noname(3).html">About</a> |
+  <a href="noname(4).html">Contact</a>
+</nav>
+<hr>
+
+<header>
+  <div class="container nav">
+    <a href="#home" class="brand">
+      FUTA<span>SURVIVAL</span>
+      <small>STUDENT SOLUTIONS AGENCY</small>
+    </a>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰ MENU</button>
+
+    <nav id="navigation">
+      <a href="#services" onclick="closeMenu()">Our Services</a>
+      <a href="#premium" onclick="closeMenu()">Premium Plan</a>
+      <a href="#reviews" onclick="closeMenu()">Testimonials</a>
+      <a href="#faq" onclick="closeMenu()">FAQ</a>
+      <a href="#services" class="nav-cta" onclick="closeMenu()">View Our Prices ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">For the academically exhausted</span>
+      <h1>School is hard.<br><span>Being broke is harder.</span></h1>
+      <p>
+        Welcome to FUTA Survival Agency, where we believe every student
+        deserves premium assistance, executive-level convenience, and
+        financial suffering with a touch of class.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-orange">Explore Our Services ↗</a>
+        <a href="#premium" class="btn btn-outline">Become a VIP Student</a>
+      </div>
+
+      <div class="trust-row">
+        <span>Premium inconvenience</span>
+        <span>Elite student support</span>
+        <span>Financial character development</span>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="card-top">
+        <span>STUDENT SURVIVAL DASHBOARD</span>
+        <span><i class="live-dot"></i>VERY AVAILABLE</span>
+      </div>
+      <h3>Your semester, outsourced.</h3>
+      <p>Our imaginary consultants have prepared your survival package.</p>
+
+      <div class="price-line">
+        <span>Emergency stationery</span>
+        <strong>₦1,000</strong>
+      </div>
+      <div class="price-line">
+        <span>Drawing board rental</span>
+        <strong>₦5,000/day</strong>
+      </div>
+      <div class="price-line">
+        <span>Academic consultation</span>
+        <strong>₦12,000/hr</strong>
+      </div>
+      <div class="price-line">
+        <span>Peace of mind</span>
+        <strong>PRICELESS*</strong>
+      </div>
+
+      <div class="card-note">
+        *Peace of mind sold separately. Results may include sudden
+        financial awareness.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Our premium offerings</span>
+      <h2>Small problems.<br>Corporate-level invoices.</h2>
+      <p>
+        We understand student life. That's why we have developed
+        solutions for problems you could probably solve with ₦200
+        and a conversation with your roommate.
+      </p>
+    </div>
+
+    <div class="service-grid">
+
+      <article class="service">
+        <div class="service-icon">📚</div>
+        <h3>Assignment Rescue Desk</h3>
+        <p>
+          Formatting assistance, research guidance, and academic
+          brainstorming for students who suddenly remember the deadline.
+        </p>
+        <div class="service-bottom">
+          <div class="price">₦15,000 <small>/ page</small></div>
+          <button onclick="book('Assignment Rescue Desk')">Request Assistance ↗</button>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">🧠</div>
+        <h3>Examination Survival Consultancy</h3>
+        <p>
+          Revision strategies, practice questions, and emergency
+          confidence-building sessions. Your brain remains your responsibility.
+        </p>
+        <div class="service-bottom">
+          <div class="price">₦25,000 <small>/ session</small></div>
+          <button onclick="book('Examination Survival Consultancy')">Book a Session ↗</button>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">📐</div>
+        <h3>Drawing Board Rental</h3>
+        <p>
+          For engineering students whose drawing board has mysteriously
+          disappeared exactly when it is needed.
+        </p>
+        <div class="service-bottom">
+          <div class="price">₦5,000 <small>/ day</small></div>
+          <button onclick="book('Drawing Board Rental')">Reserve Equipment ↗</button>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">📏</div>
+        <h3>T-Square Leasing Division</h3>
+        <p>
+          Straight lines for crooked academic situations.
+          T-square rentals are subject to our extremely serious policies.
+        </p>
+        <div class="service-bottom">
+          <div class="price">₦2,500 <small>/ day</small></div>
+          <button onclick="book('T-Square Leasing')">Lease a T-Square ↗</button>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">🥼</div>
+        <h3>Laboratory Coat Leasing</h3>
+        <p>
+          Look prepared for practicals even when your understanding
+          of the experiment is still loading.
+        </p>
+        <div class="service-bottom">
+          <div class="price">₦4,000 <small>/ day</small></div>
+          <button onclick="book('Laboratory Coat Leasing')">Request a Coat ↗</button>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">🎓</div>
+        <h3>Private Tutorial Sessions</h3>
+        <p>
+          One-on-one explanations, guided practice, and the opportunity
+          to ask the question you were too embarrassed to ask in class.
+        </p>
+        <div class="service-bottom">
+          <div class="price">₦12,000 <small>/ hour</small></div>
+          <button onclick="book('Private Tutorial Sessions')">Book a Tutorial ↗</button>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">✏️</div>
+        <h3>Emergency Stationery Credit</h3>
+        <p>
+          Forgot your pen? Borrow one. Return it in excellent condition,
+          with a signed affidavit of gratitude.
+        </p>
+        <div class="service-bottom">
+          <div class="price">₦1,000 <small>/ pen per day</small></div>
+          <button onclick="book('Emergency Stationery Credit')">Borrow Stationery ↗</button>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="disclaimer">
+      <strong>Important corporate disclosure:</strong>
+      This is a parody website created for entertainment and FUTA student
+      reactions. Prices and booking requests are fictional. No real
+      services or transactions are offered.
+    </div>
+  </div>
+</section>
+
+<section class="premium" id="premium">
+  <div class="container premium-grid">
+    <div>
+      <span class="eyebrow">Membership for the financially courageous</span>
+      <h2>The Ultimate FUTA VIP Package.</h2>
+      <p>
+        Why pay for things individually when you can pay a suspiciously
+        large amount for the privilege of paying for things together?
+      </p>
+      <ul class="premium-list">
+        <li>Priority access to imaginary equipment</li>
+        <li>Premium stationery borrowing privileges</li>
+        <li>Executive-level academic pep talks</li>
+        <li>VIP access to our fictional customer service desk</li>
+        <li>A complimentary reminder that school fees exist</li>
+      </ul>
+    </div>
+
+    <div class="membership">
+      <span class="label">THE DEPARTMENT OF EXTREME LUXURY</span>
+      <h3>Platinum Survival Plan</h3>
+      <p>For students who refuse to suffer at ordinary rates.</p>
+      <div class="big-price">₦150,000 <small>/ semester</small></div>
+      <hr>
+      <p>Includes absolutely premium imaginary privileges, a
+      personalised student survival profile, and the confidence
+      of someone whose account balance has not yet checked in.</p>
+      <button onclick="book('Platinum Survival Plan')">Apply for VIP Status ↗</button>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Completely fictional feedback</span>
+      <h2>Our imaginary clients speak.</h2>
+      <p>Testimonials have been professionally dramatised for entertainment.</p>
+    </div>
+
+    <div class="review-grid">
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <p>
+          "I came looking for a pen. I left questioning my financial
+          decisions, my life choices, and the Nigerian economy."
+        </p>
+        <strong>Anonymous Engineering Student</strong>
+        <small>Customer since approximately never</small>
+      </article>
+
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <p>
+          "The drawing board was excellent. The rental fee, however,
+          has become a permanent part of my family history."
+        </p>
+        <strong>Department of Financial Suffering</strong>
+        <small>Unverified client</small>
+      </article>
+
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <p>
+          "Their VIP plan taught me that the real practical is surviving
+          the semester with money left for food."
+        </p>
+        <strong>A Recovering Budget Student</strong>
+        <small>Identity protected for financial reasons</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Frequently questioned decisions</span>
+      <h2>Questions students may ask.</h2>
+    </div>
+
+    <details class="faq-item">
+      <summary>Are these prices actually serious?</summary>
+      <p>
+        The website is a parody. The prices are fictional, intentionally
+        outrageous, and designed to provoke reactions from FUTA students.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I really rent a drawing board?</summary>
+      <p>
+        No real rental service is operating through this website.
+        The drawing board prices are part of the joke.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can you write my test for me?</summary>
+      <p>
+        No. This is a satire of student survival businesses.
+        We can joke about examination pressure, but real learning,
+        revision guidance, and practice questions are the appropriate
+        forms of academic support.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I become a Platinum member?</summary>
+      <p>
+        Step one: locate ₦150,000. Step two: reconsider your priorities.
+        Step three: remember that this is a joke website.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is the CEO available for negotiations?</summary>
+      <p>
+        The CEO is currently in a board meeting discussing whether
+        charging ₦1,000 for a pen is too affordable.
+      </p>
+    </details>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <h2>Your academic stress deserves a premium invoice.</h2>
+      <p>FUTA Survival Agency — turning everyday student problems into luxury experiences.</p>
+    </div>
+    <a href="#services" class="btn">Inspect the Prices ↗</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">FUTA<span>SURVIVAL</span></div>
+        <p>Premium imaginary solutions for real student problems.</p>
+      </div>
+      <div>
+        <p><strong style="color:white">Navigation</strong></p>
+        <p><a href="#services">Services</a> ·
+           <a href="#premium">VIP Plan</a> ·
+           <a href="#faq">FAQ</a></p>
+      </div>
+      <div>
+        <p><strong style="color:white">Our philosophy</strong></p>
+        <p>Excellence. Innovation. Unnecessary invoices.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 FUTA Survival Agency. A parody project.</span>
+      <span>Not affiliated with FUTA. No actual services are offered.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <strong id="toast-title">Booking request received!</strong>
+  <span id="toast-message">Please remember that this is a joke website.</span>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById("navigation").classList.toggle("open");
+}
+
+function closeMenu() {
+  document.getElementById("navigation").classList.remove("open");
+}
+
+let toastTimer;
+
+function book(service) {
+  const toast = document.getElementById("toast");
+  document.getElementById("toast-title").textContent =
+    "Excellent financial decision. 😂";
+
+  document.getElementById("toast-message").textContent =
+    "You selected: " + service +
+    ". Unfortunately, our fictional department is still fictional. No booking was made.";
+
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(function() {
+    toast.classList.remove("show");
+  }, 5000);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>Careers | FUTA Survival Agency</title>
+
+<style>
+:root{
+--navy:#101827;
+--navy2:#1b2940;
+--orange:#ff9f43;
+--cream:#f7f4ed;
+--white:#fff;
+--muted:#aeb8c8;
+--green:#b7f7c4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--navy);line-height:1.65}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+.container{width:min(1080px,90%);margin:auto}
+
+header{background:var(--navy);color:white;position:sticky;top:0;z-index:10;border-bottom:1px solid #ffffff20}
+.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{font-size:17px;font-weight:900;line-height:1.2}
+.brand span{color:var(--orange)}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px;margin-top:5px}
+nav{display:flex;align-items:center;gap:23px}
+nav a{font-size:12px;color:#e1e6ee}
+nav a:hover{color:var(--orange)}
+.navbtn{background:var(--orange);color:var(--navy);padding:10px 14px;border-radius:5px;font-weight:bold}
+.menu{display:none;background:transparent;color:white;border:1px solid #ffffff50;padding:6px 10px;border-radius:5px}
+
+.hero{background:radial-gradient(ellipse at 85% 20%,#ff9f4320,transparent 40%),var(--navy);color:white;padding:82px 0}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:45px}
+.tag{display:inline-block;padding:6px 12px;border:1px solid #ff9f4355;background:#ff9f4310;color:var(--orange);border-radius:30px;font-size:10px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.06;letter-spacing:-2px;margin:23px 0}
+h1 span{color:var(--orange)}
+.hero p{color:#c4ccda;font-size:14px;max-width:520px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}
+.btn{display:inline-block;border:0;border-radius:6px;padding:13px 17px;font-size:12px;font-weight:800;cursor:pointer}
+.primary{background:var(--orange);color:var(--navy)}
+.secondary{border:1px solid #ffffff50;color:white}
+.stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:30px;color:#c4ccda;font-size:10px}
+.stats strong{display:block;color:white;font-size:20px}
+.hero-card{background:#ffffff09;border:1px solid #ffffff25;border-radius:13px;padding:24px}
+.cardtop{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted);border-bottom:1px solid #ffffff20;padding-bottom:15px}
+.hero-card h3{font-size:21px;margin:20px 0 5px}
+.jobline{padding:13px 0;border-bottom:1px solid #ffffff1c;display:flex;justify-content:space-between;gap:10px;font-size:12px}
+.jobline strong{color:var(--orange);text-align:right}
+.note{font-size:11px!important;color:#ffe0b9!important;background:#ff9f4313;border-radius:6px;padding:12px;margin-top:16px}
+
+section{padding:75px 0}
+.kicker{color:#bd6c19;font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:10px}
+h2{font-size:clamp(29px,4vw,41px);line-height:1.15;letter-spacing:-1px;margin:10px 0 13px}
+.intro{color:#687487;font-size:13px;max-width:620px}
+.sectionhead{margin-bottom:33px}
+.jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:17px;margin-top:30px}
+.job{background:white;border:1px solid #e5e2da;border-radius:10px;padding:23px;transition:.2s}
+.job:hover{transform:translateY(-4px);border-color:var(--orange)}
+.jobtop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.jobicon{width:43px;height:43px;background:#fff0dd;border-radius:9px;display:grid;place-items:center;font-size:22px}
+.badge{background:#e5f6e9;color:#24673a;padding:5px 8px;border-radius:4px;font-size:9px;font-weight:bold}
+.job h3{font-size:17px;margin:15px 0 7px}
+.job p{font-size:12px;color:#697486}
+.jobmeta{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;font-size:10px;color:#586476}
+.jobmeta span{background:#f1f2f4;padding:5px 8px;border-radius:4px}
+.salary{font-size:18px;font-weight:900;margin-top:13px}
+.salary small{font-size:10px;font-weight:normal;color:#778193}
+.job button{width:100%;margin-top:17px;padding:11px;background:var(--navy);color:white;border:0;border-radius:5px;font-weight:bold;font-size:11px;cursor:pointer}
+.job button:hover{background:#293b58}
+
+.culture{background:var(--navy);color:white}
+.culture .intro{color:#bac5d4}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.perk{background:#ffffff08;border:1px solid #ffffff1d;border-radius:9px;padding:22px}
+.perk .emoji{font-size:25px}
+.perk h3{font-size:15px;margin:13px 0 7px}
+.perk p{color:#bac5d4;font-size:12px}
+.perk strong{color:var(--orange)}
+
+.form-section{background:white}
+.formgrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:start}
+.formside{background:var(--navy);color:white;border-radius:11px;padding:25px}
+.formside h3{font-size:22px;margin:10px 0}
+.formside p{color:#bdc7d6;font-size:12px}
+.formside li{font-size:12px;margin:10px 0;list-style:none}
+.formside li:before{content:"✦ ";color:var(--orange)}
+form{display:grid;gap:15px}
+.field{display:grid;gap:6px}
+label{font-size:11px;font-weight:800}
+input,select,textarea{width:100%;padding:12px;border:1px solid #dddfe4;border-radius:6px;background:#fff;color:var(--navy);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--orange)}
+textarea{min-height:95px;resize:vertical}
+.submit{background:var(--orange);border:0;border-radius:6px;padding:14px;font-weight:900;cursor:pointer}
+.fineprint{font-size:10px;color:#788292}
+
+.faq{background:var(--cream)}
+details{border-bottom:1px solid #ddd9d0;padding:17px 0}
+summary{cursor:pointer;font-size:13px;font-weight:800}
+details p{padding-top:10px;font-size:12px;color:#687487}
+
+.cta{background:var(--orange);padding:45px 0}
+.ctarow{display:flex;justify-content:space-between;align-items:center;gap:25px}
+.cta h2{font-size:29px;margin:0 0 7px}
+.cta p{font-size:12px}
+.cta a{background:var(--navy);color:white;white-space:nowrap}
+
+footer{background:#0b111d;color:white;padding:35px 0 20px}
+.footrow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-bottom:25px}
+footer p{font-size:11px;color:#a9b3c3}
+.footbrand{font-weight:900;font-size:16px;margin-bottom:7px}
+.footbrand span{color:var(--orange)}
+.bottom{border-top:1px solid #ffffff20;padding-top:16px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:10px;color:#8f9aab}
+.toast{position:fixed;z-index:30;left:50%;bottom:20px;transform:translate(-50%,150px);width:min(400px,90%);background:var(--navy);color:white;border:1px solid #ff9f4380;border-radius:9px;padding:17px;box-shadow:0 10px 35px #0003;font-size:12px;transition:.3s}
+.toast.show{transform:translate(-50%,0)}
+.toast strong{display:block;color:var(--orange);margin-bottom:5px}
+
+@media(max-width:760px){
+.hero-grid,.formgrid{grid-template-columns:1fr;gap:30px}
+.perks{grid-template-columns:repeat(2,1fr)}
+.hero{padding:60px 0}
+}
+@media(max-width:560px){
+.nav{min-height:68px;flex-wrap:wrap}
+.menu{display:block}
+nav{display:none;width:100%;padding-bottom:15px;flex-direction:column;align-items:stretch;gap:0}
+nav.open{display:flex}
+nav a{padding:10px 0}
+nav .navbtn{text-align:center;margin-top:7px}
+.jobs,.perks{grid-template-columns:1fr}
+section{padding:55px 0}
+.ctarow{align-items:flex-start;flex-direction:column}
+h1{letter-spacing:-1.5px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="noname.html">Home</a> |
+  <a href="noname(1).html">Services</a> |
+  <a href="noname(2).html">Reports</a> |
+  <a href="noname(3).html">About</a> |
+  <a href="noname(4).html">Contact</a>
+</nav>
+<hr>
+
+<header>
+<div class="container nav">
+<a class="brand" href="#home">FUTA<span>SURVIVAL</span><small>CAREERS & RECRUITMENT</small></a>
+<button class="menu" onclick="toggleMenu()">☰ MENU</button>
+<nav id="nav">
+<a href="#jobs" onclick="closeMenu()">Open Positions</a>
+<a href="#culture" onclick="closeMenu()">Our Culture</a>
+<a href="#apply" onclick="closeMenu()">Apply Now</a>
+<a class="navbtn" href="#jobs" onclick="closeMenu()">Join the Team ↗</a>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div>
+<span class="tag">Recruitment season · Apparently</span>
+<h1>Looking for a job?<br><span>We are looking for victims.</span></h1>
+<p>
+Welcome to the careers portal of FUTA Survival Agency.
+We transform student problems into premium business opportunities.
+Now we need ambitious students to help us charge for things that
+should probably be free.
+</p>
+<div class="actions">
+<a class="btn primary" href="#jobs">Explore Vacancies ↗</a>
+<a class="btn secondary" href="#culture">Why Work With Us?</a>
+</div>
+<div class="stats">
+<div><strong>07</strong> Open positions</div>
+<div><strong>₦0</strong> Recruitment fee*</div>
+<div><strong>100%</strong> Audacity</div>
+</div>
+</div>
+
+<div class="hero-card">
+<div class="cardtop"><span>CAREERS DASHBOARD</span><span>CONFIDENTIALLY unserious</span></div>
+<h3>Your future starts here.</h3>
+<p style="font-size:12px;color:#bac5d4">A career opportunity you never knew you needed.</p>
+<div class="jobline"><span>Chief Pen Lending Officer</span><strong>₦85k/mo*</strong></div>
+<div class="jobline"><span>Drawing Board Manager</span><strong>₦120k/mo*</strong></div>
+<div class="jobline"><span>Director of Academic Panic</span><strong>₦200k/mo*</strong></div>
+<div class="jobline"><span>Head of Student Billing</span><strong>Negotiable*</strong></div>
+<p class="note">*All positions, salaries and benefits are fictional. Your first task is to realise that this is a joke.</p>
+</div>
+</div>
+</section>
+
+<section id="jobs">
+<div class="container">
+<div class="sectionhead">
+<span class="kicker">The vacancies nobody requested</span>
+<h2>Find your questionable calling.</h2>
+<p class="intro">We seek talented, hardworking individuals with excellent communication skills, strong ambition, and absolutely no fear of charging ₦1,000 for a borrowed pen.</p>
+</div>
+
+<div class="jobs">
+<article class="job">
+<div class="jobtop"><div class="jobicon">🖊️</div><span class="badge">URGENT</span></div>
+<h3>Chief Pen Lending Officer</h3>
+<p>Manage the movement of pens across campus. Ensure every borrower understands that ink does not grow on trees.</p>
+<div class="jobmeta"><span>Part-time</span><span>Stationery Division</span></div>
+<div class="salary">₦85,000 <small>/ month*</small></div>
+<button onclick="applyFor('Chief Pen Lending Officer')">Apply for this position ↗</button>
+</article>
+
+<article class="job">
+<div class="jobtop"><div class="jobicon">📐</div><span class="badge">HOT ROLE</span></div>
+<h3>Drawing Board Asset Manager</h3>
+<p>Protect, monitor and rent drawing boards. Must be able to identify a missing T-square from 100 metres.</p>
+<div class="jobmeta"><span>Flexible hours</span><span>Engineering Division</span></div>
+<div class="salary">₦120,000 <small>/ month*</small></div>
+<button onclick="applyFor('Drawing Board Asset Manager')">Apply for this position ↗</button>
+</article>
+
+<article class="job">
+<div class="jobtop"><div class="jobicon">🥼</div><span class="badge">2 VACANCIES</span></div>
+<h3>Laboratory Coat Executive</h3>
+<p>Oversee lab coat rentals and maintain the company's premium fabric-management standards.</p>
+<div class="jobmeta"><span>Part-time</span><span>Laboratory Division</span></div>
+<div class="salary">₦95,000 <small>/ month*</small></div>
+<button onclick="applyFor('Laboratory Coat Executive')">Apply for this position ↗</button>
+</article>
+
+<article class="job">
+<div class="jobtop"><div class="jobicon">🧠</div><span class="badge">HIGH PRESSURE</span></div>
+<h3>Director of Academic Panic</h3>
+<p>Provide motivational speeches to students who remember their assignments at 11:57 p.m.</p>
+<div class="jobmeta"><span>Remote-friendly</span><span>Academic Division</span></div>
+<div class="salary">₦200,000 <small>/ month*</small></div>
+<button onclick="applyFor('Director of Academic Panic')">Apply for this position ↗</button>
+</article>
+
+<article class="job">
+<div class="jobtop"><div class="jobicon">💸</div><span class="badge">EXECUTIVE</span></div>
+<h3>Head of Student Billing</h3>
+<p>Design innovative pricing strategies. Your motto: if it solves a problem, it deserves an invoice.</p>
+<div class="jobmeta"><span>Management</span><span>Finance Division</span></div>
+<div class="salary">₦250,000 <small>/ month*</small></div>
+<button onclick="applyFor('Head of Student Billing')">Apply for this position ↗</button>
+</article>
+
+<article class="job">
+<div class="jobtop"><div class="jobicon">📢</div><span class="badge">CREATIVE ROLE</span></div>
+<h3>Chief Hype & Publicity Officer</h3>
+<p>Make outrageous prices sound like premium opportunities. Must be fluent in corporate buzzwords and campus gossip.</p>
+<div class="jobmeta"><span>Creative</span><span>Marketing Division</span></div>
+<div class="salary">₦150,000 <small>/ month*</small></div>
+<button onclick="applyFor('Chief Hype and Publicity Officer')">Apply for this position ↗</button>
+</article>
+
+<article class="job">
+<div class="jobtop"><div class="jobicon">🎓</div><span class="badge">ELITE ROLE</span></div>
+<h3>Chief Survival Consultant</h3>
+<p>Advise students on surviving the semester, managing deadlines, and recovering from our own invoices.</p>
+<div class="jobmeta"><span>Consultancy</span><span>Student Relations</span></div>
+<div class="salary">₦180,000 <small>/ month*</small></div>
+<button onclick="applyFor('Chief Survival Consultant')">Apply for this position ↗</button>
+</article>
+</div>
+<p class="intro" style="margin-top:18px;font-size:10px">*Fictional salaries and vacancies. This is a parody recruitment website, not an actual employer.</p>
+</div>
+</section>
+
+<section class="culture" id="culture">
+<div class="container">
+<div class="sectionhead">
+<span class="kicker">Our workplace culture</span>
+<h2>We offer benefits money can't buy.</h2>
+<p class="intro">Mainly because there is no money, no office, and no actual company. But let's discuss the benefits anyway.</p>
+</div>
+<div class="perks">
+<div class="perk"><div class="emoji">☕</div><h3>Premium Water Privileges</h3><p>Access to water during working hours. Cup rental fee may apply.</p></div>
+<div class="perk"><div class="emoji">📈</div><h3>Rapid Career Growth</h3><p>Join as a pen manager. Become Minister of Stationery by Friday.</p></div>
+<div class="perk"><div class="emoji">🧠</div><h3>Leadership Training</h3><p>Learn to confidently explain why a borrowed pencil costs <strong>₦700</strong>.</p></div>
+<div class="perk"><div class="emoji">🏆</div><h3>Employee of the Month</h3><p>Win an imaginary gold-plated T-square and everlasting campus fame.</p></div>
+<div class="perk"><div class="emoji">🏖️</div><h3>Unlimited Annual Leave</h3><p>Because nobody can stop you from leaving a company that doesn't exist.</p></div>
+<div class="perk"><div class="emoji">💰</div><h3>Competitive Salary</h3><p>Competitive with the salary of other fictional student businesses.</p></div>
+</div>
+</div>
+</section>
+
+<section class="form-section" id="apply">
+<div class="container formgrid">
+<div class="formside">
+<span class="tag">Applications open*</span>
+<h3>Ready to make history?</h3>
+<p>Submit your application to our completely imaginary HR department.</p>
+<ul style="margin-top:22px">
+<li>No actual experience required</li>
+<li>Confidence is compulsory</li>
+<li>Financial audacity is an advantage</li>
+<li>Sense of humour strongly recommended</li>
+</ul>
+<p style="margin-top:20px;font-size:10px">*This form does not send or store applications. Do not enter sensitive personal information.</p>
+</div>
+
+<div>
+<div class="sectionhead">
+<span class="kicker">Candidate registration</span>
+<h2>Apply for your dream job.</h2>
+<p class="intro">Fill in the form to discover your recruitment fate.</p>
+</div>
+
+<form id="applicationForm">
+<div class="field">
+<label for="name">Full name</label>
+<input id="name" name="name" maxlength="80" placeholder="Your future CEO name" required>
+</div>
+
+<div class="field">
+<label for="department">Department / Course</label>
+<input id="department" name="department" maxlength="80" placeholder="e.g. Civil Engineering" required>
+</div>
+
+<div class="field">
+<label for="position">Position of interest</label>
+<select id="position" name="position" required>
+<option value="">Select a vacancy</option>
+<option>Chief Pen Lending Officer</option>
+<option>Drawing Board Asset Manager</option>
+<option>Laboratory Coat Executive</option>
+<option>Director of Academic Panic</option>
+<option>Head of Student Billing</option>
+<option>Chief Hype and Publicity Officer</option>
+<option>Chief Survival Consultant</option>
+</select>
+</div>
+
+<div class="field">
+<label for="skill">Your most impressive skill</label>
+<select id="skill" name="skill" required>
+<option value="">Choose your greatest talent</option>
+<option>Borrowing things and forgetting to return them</option>
+<option>Turning ₦500 into a full financial plan</option>
+<option>Explaining an assignment I barely understand</option>
+<option>Professional last-minute panic</option>
+<option>Convincing people to pay ridiculous prices</option>
+<option>I just need money, respectfully</option>
+</select>
+</div>
+
+<div class="field">
+<label for="pitch">Why should we hire you?</label>
+<textarea id="pitch" name="pitch" maxlength="500" placeholder="Convince our fictional CEO..." required></textarea>
+</div>
+
+<button class="submit" type="submit">SUBMIT MY APPLICATION ↗</button>
+<p class="fineprint">Parody only. No real applications are collected or transmitted.</p>
+</form>
+</div>
+</div>
+</section>
+
+<section class="faq">
+<div class="container">
+<div class="sectionhead">
+<span class="kicker">Recruitment helpdesk</span>
+<h2>Questions from desperate candidates.</h2>
+</div>
+<details><summary>Is this a real job opportunity?</summary><p>No. FUTA Survival Careers is a fictional recruitment website made for entertainment and campus reactions.</p></details>
+<details><summary>Are the salaries real?</summary><p>No. They are fictional figures designed to make the joke more convincing.</p></details>
+<details><summary>Do I need a CV?</summary><p>Only if your CV includes experience borrowing a pen and returning it before graduation.</p></details>
+<details><summary>Will you contact me after applying?</summary><p>No. The form runs locally in your browser and does not send or save your application.</p></details>
+<details><summary>Can I negotiate my salary?</summary><p>Absolutely. Our fictional HR department will respond with a fictional counteroffer and a complimentary invoice.</p></details>
+</div>
+</section>
+
+<section class="cta">
+<div class="container ctarow">
+<div><h2>Your ambition. Our questionable business model.</h2><p>Apply today. Explain the business model to your friends tomorrow.</p></div>
+<a href="#apply" class="btn">Apply Now ↗</a>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container">
+<div class="footrow">
+<div><div class="footbrand">FUTA<span>SURVIVAL</span></div><p>Careers for the academically ambitious and financially courageous.</p></div>
+<div><p><strong style="color:white">Explore</strong></p><p><a href="#jobs">Open Positions</a> · <a href="#culture">Our Culture</a> · <a href="#apply">Apply</a></p></div>
+<div><p><strong style="color:white">Legal Department</strong></p><p>Fictional company. Fictional jobs. Very real jokes.</p></div>
+</div>
+<div class="bottom"><span>© 2026 FUTA Survival Careers · Parody project</span><span>Not affiliated with FUTA or any actual employer.</span></div>
+</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+<strong id="toastTitle">HR Department</strong>
+<span id="toastText"></span>
+</div>
+
+<script>
+function toggleMenu(){
+document.getElementById('nav').classList.toggle('open');
+}
+function closeMenu(){
+document.getElementById('nav').classList.remove('open');
+}
+function applyFor(position){
+document.getElementById('position').value=position;
+document.getElementById('apply').scrollIntoView({behavior:'smooth'});
+}
+let toastTimer;
+function showToast(title,message){
+document.getElementById('toastTitle').textContent=title;
+document.getElementById('toastText').textContent=message;
+document.getElementById('toast').classList.add('show');
+clearTimeout(toastTimer);
+toastTimer=setTimeout(function(){
+document.getElementById('toast').classList.remove('show');
+},6000);
+}
+document.getElementById('applicationForm').addEventListener('submit',function(event){
+event.preventDefault();
+const name=document.getElementById('name').value.trim();
+const position=document.getElementById('position').value;
+const skill=document.getElementById('skill').value;
+if(!name||!position||!skill)return;
+showToast(
+'APPLICATION RECEIVED… IN OUR IMAGINATION 😂',
+'Dear '+name+', your application for '+position+
+' has entered our fictional HR system. Your skill in "'+skill+
+'" is under review. Kindly retain your current employment status: unemployed by this fictional company.'
+);
+this.reset();
+});
+</script>
+</body>
+</html>

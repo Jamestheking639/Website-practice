@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=d,evice-width, initial-scale=1.0">
+<meta name="theme-color" content="#091629">
+<title>CLIB | Campus Logistics & Intelligence Bureau</title>
+<style>
+:root{
+ --navy:#091629;--navy2:#102541;--navy3:#183553;
+ --gold:#efbd69;--gold2:#ffda96;--cream:#f5f1e8;
+ --ink:#13243a;--muted:#9eafc4;--line:#30445d;
+ --green:#78d6a4;--red:#ff9e91;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{margin:0;background:var(--cream);color:var(--ink);
+ font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+button,input,select{font:inherit}
+button,a{ -webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+.topbar{background:var(--navy);color:white;position:sticky;top:0;z-index:20;border-bottom:1px solid #34455a}
+.nav{max-width:1300px;margin:auto;padding:13px 22px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;min-width:235px}
+.seal{width:49px;height:49px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:28px;position:relative}
+.seal:after{content:"";position:absolute;inset:4px;border:1px solid var(--gold);border-radius:50%}
+.brand-name{font: bold 29px Georgia,serif;color:var(--gold);line-height:1}
+.brand-sub{font-size:9px;letter-spacing:1.5px;color:#e7e9ef}
+.brand-motto{font:italic 12px Georgia,serif;color:var(--gold)}
+.navlinks{display:flex;align-items:center;justify-content:flex-end;gap:20px;flex:1}
+.navlinks a{font-size:12px;color:#e4e9f0}
+.navlinks a:hover{color:var(--gold)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;
+ border:1px solid var(--gold);background:var(--gold);color:#172235;
+ padding:11px 16px;border-radius:7px;font-weight:700;font-size:13px;
+ transition:.2s}
+.btn:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--gold)}
+.btn-outline:hover{color:var(--navy);background:var(--gold)}
+.btn-small{padding:8px 11px;font-size:12px}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);color:white;border-radius:6px;padding:8px}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--navy);color:white}
+.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:
+ linear-gradient(90deg,rgba(7,19,35,.99) 0%,rgba(7,19,35,.91) 38%,rgba(7,19,35,.35) 76%,rgba(7,19,35,.6) 100%),
+ url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85") center 45%/cover}
+.hero-inner{max-width:1250px;margin:auto;padding:65px 24px 32px;min-height:390px;display:flex;align-items:center}
+.hero-copy{max-width:680px}
+.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:bold}
+h1,h2,h3,p{margin-top:0}
+h1{font: bold clamp(35px,5vw,58px)/1.07 Georgia,serif;margin:15px 0}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font:italic 22px Georgia,serif;color:var(--gold);margin:0 0 14px}
+.hero p{color:#e0e6ed;max-width:570px;font-size:15px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:23px}
+.hero-stats{display:flex;gap:24px;margin-top:32px;flex-wrap:wrap}
+.stat{border-left:2px solid var(--gold);padding-left:12px}
+.stat strong{display:block;color:var(--gold);font: bold 22px Georgia,serif}
+.stat small{display:block;font-size:11px;color:#d5dfeb}
+.hero-stamp{position:absolute;right:6%;top:38px;border:1px solid var(--gold);
+ border-radius:7px;padding:16px 13px;text-align:center;color:var(--gold);
+ letter-spacing:2px;font-size:10px;line-height:1.7;background:#091629cc}
+.hero-stamp b{display:block;font-size:26px}
+.disclaimer{background:#0c1c30;color:#b4c1d0;text-align:center;padding:8px 16px;font-size:10px;border-top:1px solid #283c53}
+.quickbar{background:#10233b;color:white;border-bottom:4px solid var(--gold)}
+.quickbar-inner{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);padding:12px}
+.quick-item{display:flex;align-items:center;gap:10px;padding:10px 13px;border-right:1px solid #34485f;font-size:11px}
+.quick-item:last-child{border:0}
+.quick-icon{border:1px solid #70839b;color:var(--gold);width:39px;height:39px;border-radius:9px;display:grid;place-items:center;font-size:21px;flex-shrink:0}
+.quick-item strong{display:block;font-size:12px}
+.quick-item small{color:#aebed0}
+main{max-width:1300px;margin:auto;padding:20px 20px 45px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:15px}
+.section-head h2{font: bold 26px Georgia,serif;margin:0;color:var(--navy)}
+.section-head p{font-size:12px;color:#68798d;margin:4px 0 0}
+.panel{background:var(--navy);color:white;border-radius:11px;border:1px solid #263c56;padding:18px}
+.panel h2,.panel h3{font-family:Georgia,serif}
+.directory-layout{display:grid;grid-template-columns:1fr 1fr .88fr;gap:13px;align-items:stretch}
+.directory-panel{min-width:0}
+.panel-title{display:flex;gap:10px;align-items:center;margin-bottom:13px}
+.panel-title .big-icon{font-size:25px;color:var(--gold)}
+.panel-title h2{font-size:22px;margin:0}
+.panel-title p{font-size:11px;color:#bac6d4;margin:2px 0 0}
+.searchbox{display:flex;margin-bottom:11px}
+.searchbox input{min-width:0;flex:1;padding:11px;border-radius:7px 0 0 7px;border:1px solid #cbd2dc;font-size:12px}
+.searchbox button{border:0;background:var(--gold);padding:0 15px;border-radius:0 7px 7px 0}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.chip{border:1px solid #65788f;color:#dbe4ed;background:transparent;border-radius:20px;padding:6px 10px;font-size:10px}
+.chip.active,.chip:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.place-list{display:flex;flex-direction:column;gap:5px}
+.place{display:flex;align-items:center;gap:10px;text-align:left;background:#f4f2ec;
+ border:1px solid #d5d7d7;border-radius:7px;padding:9px;color:var(--ink);width:100%}
+.place:hover{border-color:var(--gold);background:white}
+.place-icon{width:35px;height:35px;display:grid;place-items:center;border-radius:50%;color:white;font-size:17px;flex-shrink:0}
+.place-info{min-width:0;flex:1}
+.place-info strong{display:block;font-size:11px}
+.place-info small{display:block;color:#64758a;font-size:9px}
+.place-arrow{font-size:19px;color:#8a98a7}
+.empty{color:#bac7d6;font-size:12px;padding:20px 4px;text-align:center}
+.map-tabs{display:flex;gap:5px;margin-bottom:8px}
+.map-tab{background:transparent;border:1px solid #566a82;color:#d8e1ec;padding:7px 12px;border-radius:5px;font-size:10px}
+.map-tab.active{background:var(--gold);color:var(--navy)}
+.demo-map{height:270px;position:relative;overflow:hidden;border:1px solid #425974;border-radius:8px;
+ background-color:#1a3c42;background-image:
+ linear-gradient(30deg,transparent 45%,#47695b 46%,#47695b 48%,transparent 49%),
+ linear-gradient(120deg,transparent 46%,#7e9777 47%,#7e9777 49%,transparent 50%),
+ repeating-linear-gradient(0deg,transparent 0 39px,#aec2ad25 40px 42px),
+ repeating-linear-gradient(90deg,transparent 0 43px,#aec2ad25 44px 46px)}
+.demo-map.satellite{background-color:#233a32;background-image:
+ radial-gradient(ellipse at 20% 25%,#526c43 0 12%,transparent 13%),
+ radial-gradient(ellipse at 78% 30%,#526c43 0 15%,transparent 16%),
+ radial-gradient(ellipse at 50% 80%,#526c43 0 18%,transparent 19%),
+ repeating-linear-gradient(40deg,transparent 0 30px,#8ba28b36 31px 34px)}
+.map-road{position:absolute;background:#b8b9a1;height:8px;width:130%;left:-10%;top:50%;transform:rotate(-30deg);border:1px solid #ddd7b9}
+.map-road.two{top:35%;transform:rotate(48deg);height:6px}
+.map-label{position:absolute;background:#0b2038ed;color:white;border:1px solid var(--gold);padding:5px 7px;border-radius:5px;font-size:10px;box-shadow:0 2px 8px #0005;max-width:135px}
+.map-label b{color:var(--gold)}
+.map-pin{position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);background:#ff796d;color:white;border:3px solid white;border-radius:50% 50% 50% 0;width:23px;height:23px;rotate:-45deg;box-shadow:0 2px 10px #0007}
+.map-pin:after{content:"";position:absolute;width:6px;height:6px;background:white;border-radius:50%;left:6px;top:6px}
+.map-note{font-size:9px;color:#b6c5d5;margin:8px 0}
+.route-card{border:1px solid #536a83;border-radius:7px;padding:12px;margin-top:10px}
+.route-card h3{font-size:14px;margin:0 0 8px}
+.route-row{display:flex;justify-content:space-between;gap:8px;font-size:11px;margin:6px 0;color:#d1dce8}
+.route-row strong{color:var(--gold)}
+.report-panel{border:1px solid var(--gold);padding:15px}
+.report-tag{display:inline-block;border-radius:20px;background:#234a39;color:var(--green);font-size:9px;padding:3px 8px;font-weight:bold}
+.report-image{height:105px;border-radius:7px;background:
+ linear-gradient(0deg,#071629a8,#07162922),
+ url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=700&q=70") center/cover;margin:10px 0}
+.report-details{font-size:11px;color:#d4dce6}
+.report-details p{margin:8px 0}
+.report-details b{color:var(--gold)}
+.full{width:100%;margin-top:12px}
+.lower-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin-top:14px}
+.services{background:var(--navy);color:white;border-radius:11px;padding:20px;border:1px solid #2b4059}
+.services h2,.assessment h2{font: bold 27px Georgia,serif;margin:0}
+.services-intro{color:#c6d0dc;font-size:12px;margin:3px 0 17px}
+.packages{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.package{border:1px solid #56677c;border-radius:8px;padding:13px;background:#0d1d32;display:flex;gap:10px;align-items:start}
+.package-icon{font-size:25px;color:var(--gold)}
+.package h3{font-size:12px;margin:0 0 5px}
+.price{font-size:18px;font-weight:bold;color:var(--gold);margin-bottom:5px}
+.package p{font-size:10px;color:#c0ccda;margin:0}
+.package .tag{font-size:8px;color:var(--gold);letter-spacing:1px}
+.assessment{border:1px solid #cbd0d4;border-radius:11px;padding:20px;background:white}
+.assessment .sub{font-size:12px;color:#718097}
+.assessment h2{font-size:24px;color:var(--navy)}
+.assessment-form label{display:block;font-size:12px;font-weight:bold;margin:13px 0 5px}
+.assessment-form select,.assessment-form input{width:100%;border:1px solid #cbd3dc;border-radius:6px;padding:10px;background:#fff;color:var(--ink)}
+.assessment-result{display:none;margin-top:15px;padding:14px;border-radius:8px;background:#edf4ef;border:1px solid #b6d5c0}
+.assessment-result h3{margin:0 0 5px;font: bold 21px Georgia,serif}
+.scoreline{height:8px;background:#d5e2d8;border-radius:8px;overflow:hidden;margin:9px 0}
+.scoreline span{display:block;height:100%;width:0;background:#408b68;transition:width .6s}
+.testimonials{margin-top:25px}
+.testimonials h2{font: bold 25px Georgia,serif;color:var(--navy);margin-bottom:5px}
+.testimonials .intro{font-size:11px;color:#6b7b8f}
+.quote-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}
+.quote{background:#fff;border:1px solid #d6d8d7;border-radius:8px;padding:14px;font-size:12px}
+.stars{color:#d99a2f;letter-spacing:2px}
+.quote p{font-style:italic;margin:8px 0;color:#394d65}
+.quote small{font-size:10px;color:#758295}
+.quote em{display:inline-block;font-style:normal;background:#f5e3be;padding:3px 6px;border-radius:4px;font-size:9px;margin-top:7px}
+.footer{background:var(--navy);color:#d3dce7;border-top:4px solid var(--gold);padding:25px 20px}
+.footer-inner{max-width:1250px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer .brand-name{font-size:26px}
+.footer-links{display:flex;gap:15px;flex-wrap:wrap;font-size:11px}
+.footer-links a:hover{color:var(--gold)}
+.footer-note{border-top:1px solid #34465d;margin:18px auto 0;padding-top:12px;max-width:1250px;color:#95a6ba;font-size:10px}
+.modal{position:fixed;inset:0;z-index:50;background:#020b16d9;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}
+.modal-box{width:min(560px,100%);max-height:90vh;overflow:auto;background:#f8f6f0;color:var(--ink);border-radius:12px;padding:22px;box-shadow:0 20px 80px #0008}
+.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.modal-head h2{font: bold 25px Georgia,serif;margin:0}
+.close{background:#e7e7e2;border:0;border-radius:6px;padding:6px 10px;font-size:20px}
+.modal-body{font-size:13px}
+.modal-body label{display:block;font-weight:bold;font-size:12px;margin:12px 0 5px}
+.modal-body input,.modal-body select,.modal-body textarea{width:100%;padding:11px;border:1px solid #c8ced4;border-radius:6px;background:white}
+.modal-body textarea{min-height:75px;resize:vertical}
+.result-box{background:#0d2038;color:white;padding:18px;border:1px solid var(--gold);border-radius:8px;margin-top:14px}
+.result-box .classification{font: bold 22px Georgia,serif;color:var(--gold)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#10233b;color:white;border:1px solid var(--gold);padding:12px 17px;border-radius:8px;z-index:100;font-size:12px;opacity:0;pointer-events:none;transition:.25s;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.small-muted{font-size:10px;color:#748196}
+@media(max-width:1000px){
+ .navlinks{gap:12px}.navlinks a{font-size:11px}
+ .directory-layout{grid-template-columns:1fr 1fr}
+ .report-panel{grid-column:1/-1}
+ .report-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+ .report-image{height:130px}
+ .quick-item{padding:8px}.quick-item small{display:none}
+ .quote-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:720px){
+ .nav{padding:10px 14px;gap:10px;flex-wrap:wrap}
+ .brand{min-width:0;flex:1}.brand-name{font-size:24px}.brand-sub{font-size:8px}
+ .seal{width:42px;height:42px;font-size:23px}
+ .nav>.btn{display:none}.menu-toggle{display:block}
+ .navlinks{display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:0;padding:5px 0 10px}
+ .navlinks.open{display:flex}
+ .navlinks a{padding:11px;border-bottom:1px solid #2b4058;font-size:13px}
+ .hero-inner{padding:42px 20px 26px;min-height:390px}
+ .hero:before{background:linear-gradient(90deg,#071323f5,#071323cf),url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=75") center/cover}
+ .hero-stamp{display:none}
+ h1{font-size:39px}.hero-sub{font-size:19px}.hero p{font-size:13px}
+ .hero-stats{gap:14px}.stat strong{font-size:18px}.stat small{font-size:10px}
+ .quickbar-inner{grid-template-columns:repeat(2,1fr);padding:7px}
+ .quick-item{border-right:0;border-bottom:1px solid #34485f;padding:9px 6px}
+ .quick-item:last-child{grid-column:1/-1}
+ main{padding:14px 11px 30px}
+ .directory-layout,.lower-grid{grid-template-columns:1fr}
+ .report-panel{grid-column:auto}
+ .report-columns{display:block}
+ .packages{grid-template-columns:1fr}
+ .package{padding:14px}
+ .quote-grid{grid-template-columns:1fr 1fr}
+ .panel{padding:14px}
+ .section-head h2{font-size:22px}
+ .footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:390px){
+ .quote-grid{grid-template-columns:1fr}
+ .hero-actions .btn{flex:1;font-size:11px;padding:10px}
+ .hero-stats{gap:10px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="noname.html">Home</a> |
+  <a href="noname(1).html">Services</a> |
+  <a href="noname(2).html">Reports</a> |
+  <a href="noname(3).html">About</a> |
+  <a href="noname(4).html">Contact</a>
+</nav>
+<hr>
+
+<header class="topbar">
+ <nav class="nav">
+  <a href="#home" class="brand" aria-label="CLIB home">
+   <span class="seal">✦</span>
+   <span>
+    <span class="brand-name">CLIB</span>
+    <span class="brand-sub" style="display:block">CAMPUS LOGISTICS & INTELLIGENCE BUREAU</span>
+    <span class="brand-motto">Locate · Navigate · Survive</span>
+   </span>
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰ Menu</button>
+  <div class="navlinks" id="navlinks">
+   <a href="#home">Home</a><a href="#directory">Directory</a>
+   <a href="#reports">Intelligence</a><a href="#services">Services</a>
+   <a href="#assessment">Assessment</a><a href="#about">About</a>
+  </div>
+  <a class="btn" href="#directory">♟ Get Started ↗</a>
+ </nav>
+</header>
+
+<section class="hero" id="home">
+ <div class="hero-inner">
+  <div class="hero-copy">
+   <div class="eyebrow">THE OFFICIAL (AND TOTALLY NOT OFFICIAL) BUREAU</div>
+   <h1>Campus Navigation<br>& <span>Intelligence Platform</span></h1>
+   <div class="hero-sub">Because getting lost is not a plan.</div>
+   <p>Strategic campus navigation, location intelligence, and premium survival services to help you move smarter, find faster, and thrive on campus.</p>
+   <div class="hero-actions">
+    <a class="btn" href="#services">Explore Services →</a>
+    <button class="btn btn-outline" id="missionBtn">▶ Watch Our Mission</button>
+   </div>
+   <div class="hero-stats">
+    <div class="stat"><strong>100%</strong><small>Campus coverage<br>(we think)</small></div>
+    <div class="stat"><strong>24/7</strong><small>Intelligence support<br>(usually)</small></div>
+    <div class="stat"><strong>∞</strong><small>Students served<br>(in our imagination)</small></div>
+   </div>
+  </div>
+  <div class="hero-stamp">STUDENT<br>SURVIVAL<br>IS OUR PRIORITY<b>✦</b></div>
+ </div>
+ <div class="disclaimer">* CLIB is a fictional parody project. It is not affiliated with FUTA or any university. Locations and reports marked DEMO are illustrative only.</div>
+</section>
+
+<div class="quickbar">
+ <div class="quickbar-inner">
+  <a class="quick-item" href="#directory"><span class="quick-icon">✥</span><span><strong>Find Lecture Halls</strong><small>Never miss class again.</small></span></a>
+  <a class="quick-item" href="#directory"><span class="quick-icon">⬡</span><span><strong>Locate Offices</strong><small>From admin to banks.</small></span></a>
+  <a class="quick-item" href="#reports"><span class="quick-icon">▤</span><span><strong>Campus Reports</strong><small>Real-time-ish (not really).</small></span></a>
+  <a class="quick-item" href="#services"><span class="quick-icon">♙</span><span><strong>Premium Services</strong><small>Because you're worth it.</small></span></a>
+  <a class="quick-item" href="#assessment"><span class="quick-icon">▣</span><span><strong>Student Assessment</strong><small>Know your survival level.</small></span></a>
+ </div>
+</div>
+
+<main>
+ <section id="directory">
+  <div class="directory-layout">
+   <div class="panel directory-panel">
+    <div class="panel-title"><span class="big-icon">📍</span><div><h2>Campus Directory</h2><p>Find lecture halls, offices, and essential services.</p></div></div>
+    <div class="searchbox">
+     <input id="searchInput" type="search" placeholder="Search a location or category..." aria-label="Search campus directory">
+     <button id="searchBtn" aria-label="Search">⌕</button>
+    </div>
+    <div class="chips" id="categoryChips">
+     <button class="chip active" data-category="All">All</button>
+     <button class="chip" data-category="Lecture Hall">Lecture Halls</button>
+     <button class="chip" data-category="Administrative">Offices</button>
+     <button class="chip" data-category="Service">Services</button>
+     <button class="chip" data-category="Landmark">Landmarks</button>
+    </div>
+    <div class="place-list" id="placeList"></div>
+    <p class="small-muted" style="color:#a8b9ca;margin:12px 0 0">DEMO DIRECTORY: verify actual locations locally before travelling.</p>
+   </div>
+
+   <div class="panel">
+    <div class="panel-title"><span class="big-icon">◉</span><div><h2>Navigation Console</h2><p>A simulated campus orientation map.</p></div></div>
+    <div class="map-tabs">
+     <button class="map-tab active" data-map="map">Map View</button>
+     <button class="map-tab" data-map="satellite">Satellite View</button>
+    </div>
+    <div class="demo-map" id="demoMap" aria-label="Illustrative map, not geographic data">
+     <div class="map-road"></div><div class="map-road two"></div>
+     <span class="map-label" style="left:8%;top:18%">▣ Library</span>
+     <span class="map-label" style="left:58%;top:27%">♜ LT 1</span>
+     <span class="map-label" style="left:11%;top:68%">▤ Cafeteria</span>
+     <span class="map-label" style="right:5%;top:76%">▣ Admin</span>
+     <span class="map-pin" title="Illustrative map marker"></span>
+    </div>
+    <p class="map-note">⚠ NOT A REAL MAP — graphic is decorative and not to scale. No GPS or live tracking is used.</p>
+    <div class="route-card">
+     <h3 id="routeTitle">◈ Selected destination: LT 1 — Main Lecture Theatre</h3>
+     <div class="route-row"><span>♙ Estimated walking time</span><strong id="routeTime">6 minutes*</strong></div>
+     <div class="route-row"><span>◉ Difficulty level</span><strong id="routeDifficulty">Easy</strong></div>
+     <div class="route-row"><span>✦ Intelligence rating</span><strong style="color:var(--green)" id="routeRisk">Low risk</strong></div>
+     <p class="small-muted" style="color:#a8b9ca;margin:8px 0 0">* Fictional estimates for demonstration only.</p>
+    </div>
+    <button class="btn full" id="routeBtn">Generate Navigation Briefing →</button>
+   </div>
+
+   <div class="panel report-panel" id="reports">
+    <div class="panel-title"><span class="big-icon">▤</span><div><h2>Campus Intelligence Report</h2><p>Official-looking. Entirely for fun.</p></div></div>
+    <div class="report-columns">
+     <div>
+      <h3 id="reportTitle" style="font-size:17px;margin-bottom:5px">LT 1 — Main Lecture Theatre</h3>
+      <div style="margin-bottom:5px;font-size:11px">Security classification: <span class="report-tag" id="reportClass">LOW</span></div>
+      <div class="report-image" role="img" aria-label="Illustrative university building photograph"></div>
+     </div>
+     <div class="report-details">
+      <p>📍 <b>Location</b><br><span id="reportLocation">Illustrative Building A, Floor 1</span></p>
+      <p>▤ <b>Facilities</b><br><span id="reportFacilities">Projector, seating, and an imaginary 300 seats</span></p>
+      <p>◷ <b>Best time to visit</b><br><span id="reportTime">Before 7:50 AM (less crowded, in theory)</span></p>
+      <p>⚠ <b>Common issues</b></p>
+      <ul style="padding-left:17px;margin:3px 0">
+       <li>Late lecturer arrival (probability unknown)</li>
+       <li>Unexpected room change (fictional)</li>
+       <li>Power outage (not a prediction)</li>
+      </ul>
+     </div>
+    </div>
+    <button class="btn btn-outline full" id="fullReportBtn">View Full Report →</button>
+   </div>
+  </div>
+ </section>
+
+ <section class="lower-grid">
+  <div class="services" id="services">
+   <div class="eyebrow">PREMIUM DIVISION</div>
+   <h2>Premium Services</h2>
+   <p class="services-intro">For those who need more than just directions. Prices are fictional parody examples.</p>
+   <div class="packages">
+    <article class="package"><span class="package-icon">◎</span><div><div class="tag">ENTRY LEVEL</div><h3>Basic Reconnaissance</h3><div class="price">₦2,500</div><p>Quick location help and a simulated briefing.</p><button class="btn btn-outline btn-small packageBtn" data-package="Basic Reconnaissance">Inspect package</button></div></article>
+    <article class="package"><span class="package-icon">▥</span><div><div class="tag">ADVANCED</div><h3>Advanced Campus Intelligence</h3><div class="price">₦15,000</div><p>Detailed mock reports, crowd analysis, and optimal timing.</p><button class="btn btn-outline btn-small packageBtn" data-package="Advanced Campus Intelligence">Inspect package</button></div></article>
+    <article class="package"><span class="package-icon">⬡</span><div><div class="tag">EXECUTIVE</div><h3>Executive Lost-Student Recovery</h3><div class="price">₦75,000</div><p>We find you. No questions asked. Many forms completed.</p><button class="btn btn-outline btn-small packageBtn" data-package="Executive Lost-Student Recovery">Inspect package</button></div></article>
+    <article class="package"><span class="package-icon">♛</span><div><div class="tag">NATIONAL EMERGENCY</div><h3>Emergency Navigation</h3><div class="price">₦250,000</div><p>VIP escort concept, personal guide, and imaginary 24/7 support.</p><button class="btn btn-outline btn-small packageBtn" data-package="National Emergency Navigation">Inspect package</button></div></article>
+   </div>
+   <button class="btn full" id="compareBtn">Compare All Packages →</button>
+   <p class="small-muted" style="color:#a8b9ca;margin:10px 0 0">These packages are fictional. No payment is accepted or requested.</p>
+  </div>
+
+  <div class="assessment" id="assessment">
+   <div class="panel-title"><span style="font-size:27px">♙</span><div><h2>Student Risk Assessment</h2><p class="sub">Discover your campus survival level.</p></div></div>
+   <p style="font-size:12px;color:#6c7b8c">Answer a few questions to receive your personalized, completely unscientific intelligence classification.</p>
+   <form class="assessment-form" id="assessmentForm">
+    <label for="navSkill">How well do you know your campus?</label>
+    <select id="navSkill" required>
+     <option value="0">I need a guide to find the gate</option>
+     <option value="1">I know a few places</option>
+     <option value="2">I can find most places</option>
+     <option value="3">I am the unofficial campus map</option>
+    </select>
+    <label for="lateness">How often do you arrive late because of directions?</label>
+    <select id="lateness" required>
+     <option value="3">Almost every time</option>
+     <option value="2">Sometimes</option>
+     <option value="1">Rarely</option>
+     <option value="0">Never. I have superior intelligence.</option>
+    </select>
+    <label for="asking">What do you do when lost?</label>
+    <select id="asking" required>
+     <option value="3">Walk confidently in the wrong direction</option>
+     <option value="2">Ask another confused student</option>
+     <option value="1">Check directions or ask staff</option>
+     <option value="0">I always verify the route first</option>
+    </select>
+    <button class="btn full" type="submit">Analyze My Survival Level →</button>
+   </form>
+   <div class="assessment-result" id="assessmentResult" aria-live="polite">
+    <h3 id="resultTitle">Assessment complete</h3>
+    <strong id="resultScore"></strong>
+    <div class="scoreline"><span id="scoreFill"></span></div>
+    <p id="resultText" style="font-size:12px;margin:7px 0"></p>
+    <button class="btn btn-small" id="copyResult" type="button">Copy My Classification</button>
+   </div>
+   <p class="small-muted" style="margin-top:12px">For entertainment only. No data is uploaded or sent to a server.</p>
+  </div>
+ </section>
+
+ <section class="testimonials" id="about">
+  <h2>What Our "Clients" Say</h2>
+  <p class="intro">Fictional testimonials. Names omitted to protect the identities of people who do not exist.</p>
+  <div class="quote-grid">
+   <article class="quote"><div class="stars">★★★★★</div><p>"The intelligence report saved me from walking in circles for three hours. Worth every imaginary naira."</p><small>— Anonymous 100-Level Student</small><br><em>Premium Package</em></article>
+   <article class="quote"><div class="stars">★★★★★</div><p>"I used their premium service and actually found my lecture hall on time. This is a game-changer!"</p><small>— A Grateful Student (Fictional)</small><br><em>Advanced Package</em></article>
+   <article class="quote"><div class="stars">★★★★★</div><p>"The risk assessment was so accurate. It literally roasted my navigation skills."</p><small>— A Humble Survivor</small><br><em>Free Assessment</em></article>
+   <article class="quote"><div class="stars">★★★★★</div><p>"CLIB has made campus life easier, more organized, and slightly more expensive. 10/10."</p><small>— A Loyal Customer (Imaginary)</small><br><em>Executive Package</em></article>
+  </div>
+ </section>
+</main>
+
+<footer class="footer">
+ <div class="footer-inner">
+  <a href="#home" class="brand">
+   <span class="seal">✦</span><span><span class="brand-name">CLIB</span><span class="brand-sub" style="display:block">CAMPUS LOGISTICS & INTELLIGENCE BUREAU</span><span class="brand-motto">Locate · Navigate · Survive</span></span>
+  </a>
+  <div class="footer-links">
+   <a href="#home">Home</a><a href="#directory">Directory</a><a href="#reports">Intelligence</a><a href="#services">Services</a><a href="#assessment">Assessment</a><a href="#about">About</a>
+  </div>
+ </div>
+ <div class="footer-note">© 2026 CLIB. A fictional organization for entertainment and parody. Not affiliated with FUTA or any university. All demo locations, estimates, reports, reviews, and service prices are illustrative only. <span style="float:right;color:var(--gold)">Because campus life is a mission. ✦</span></div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="modal-box">
+  <div class="modal-head"><div><div class="eyebrow" style="color:#9a6b22">CLIB INTELLIGENCE DESK</div><h2 id="modalTitle">Mission Briefing</h2></div><button class="close" id="modalClose" aria-label="Close dialog">×</button></div>
+  <div class="modal-body" id="modalBody"></div>
+ </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+
+const places=[
+ {id:"lt1",name:"LT 1 — Main Lecture Theatre",category:"Lecture Hall",icon:"🏛",color:"#1b8f83",building:"Illustrative Building A",floor:"Floor 1",facilities:"Projector, seating, and a demonstration capacity of 300",time:"Before 7:50 AM (less crowded, in theory)",walk:6,difficulty:"Easy",risk:"Low",note:"A fictional lecture venue used to demonstrate the CLIB directory."},
+ {id:"registry",name:"Registrar's Office",category:"Administrative",icon:"▤",color:"#9153b5",building:"Illustrative Admin Block",floor:"Ground floor",facilities:"Mock administrative counters and imaginary forms",time:"Early morning, after verifying actual office hours",walk:9,difficulty:"Moderate",risk:"Medium",note:"A demo entry representing a university administrative office."},
+ {id:"library",name:"Library",category:"Landmark",icon:"▥",color:"#668c46",building:"Illustrative Library Complex",floor:"Multiple floors (demo)",facilities:"Reading desks and imaginary study zones",time:"Quiet study hours (verify locally)",walk:4,difficulty:"Easy",risk:"Low",note:"A fictionalized directory entry for a campus library."},
+ {id:"cafeteria",name:"Cafeteria",category:"Service",icon:"♨",color:"#dc593f",building:"Illustrative Student Centre",floor:"Ground floor",facilities:"Food counter and seating (illustrative)",time:"Outside the busiest meal period",walk:5,difficulty:"Easy",risk:"Low",note:"A demo food-service location. No actual menu or opening hours are provided."},
+ {id:"health",name:"Health Centre",category:"Service",icon:"✚",color:"#4b638f",building:"Illustrative Health Services",floor:"Ground floor",facilities:"Medical reception (demo description only)",time:"Confirm actual operating hours locally",walk:8,difficulty:"Moderate",risk:"Medium",note:"This entry is not a verified medical facility. For urgent care, contact local emergency services or an actual health provider."},
+ {id:"bank",name:"Banking Hall",category:"Service",icon:"▣",color:"#2086bb",building:"Illustrative Student Union",floor:"Ground floor",facilities:"Fictional financial service counters",time:"Confirm the actual branch and opening hours",walk:7,difficulty:"Easy",risk:"Low",note:"An illustrative banking-related campus directory entry."},
+ {id:"engineering",name:"Engineering Complex",category:"Landmark",icon:"⚙",color:"#a67d35",building:"Illustrative Engineering Zone",floor:"Various",facilities:"Demo workshops and academic spaces",time:"Check your official timetable",walk:11,difficulty:"Moderate",risk:"Medium",note:"An illustrative complex, not a verified building or route."},
+ {id:"studentcentre",name:"Student Centre",category:"Landmark",icon:"♙",color:"#7e6eaa",building:"Illustrative Central Zone",floor:"Various",facilities:"Mock student service area",time:"Daytime (demo suggestion)",walk:5,difficulty:"Easy",risk:"Low",note:"A placeholder entry for general student services."}
+];
+
+let selectedCategory="All";
+let selectedPlace=places[0];
+let currentReport=places[0];
+const $=id=>document.getElementById(id);
+
+function toast(message){
+ const el=$("toast");el.textContent=message;el.classList.add("show");
+ clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),2800);
+}
+function openModal(title,html){
+ $("modalTitle").textContent=title;$("modalBody").innerHTML=html;
+ $("modal").classList.add("show");document.body.style.overflow="hidden";
+ $("modalClose").focus();
+}
+function closeModal(){
+ $("modal").classList.remove("show");document.body.style.overflow="";
+}
+$("modalClose").addEventListener("click",closeModal);
+$("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+function renderPlaces(){
+ const q=$("searchInput").value.trim().toLowerCase();
+ const list=places.filter(p=>
+  (selectedCategory==="All"||p.category===selectedCategory)&&
+  (p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)||
+   p.building.toLowerCase().includes(q)||p.note.toLowerCase().includes(q))
+ );
+ $("placeList").innerHTML="";
+ if(!list.length){
+  $("placeList").innerHTML='<div class="empty">No matching demo locations.<br>Try a different search term.</div>';return;
+ }
+ list.forEach(p=>{
+  const b=document.createElement("button");b.className="place";b.type="button";
+  b.innerHTML='<span class="place-icon" style="background:'+p.color+'">'+p.icon+'</span>'+
+   '<span class="place-info"><strong></strong><small></small></span><span class="place-arrow">›</span>';
+  b.querySelector("strong").textContent=p.name;
+  b.querySelector("small").textContent=p.category+" · "+p.building;
+  b.addEventListener("click",()=>selectPlace(p));
+  $("placeList").appendChild(b);
+ });
+}
+function selectPlace(p){
+ selectedPlace=p;currentReport=p;
+ $("routeTitle").textContent="◈ Selected destination: "+p.name;
+ $("routeTime").textContent=p.walk+" minutes*";
+ $("routeDifficulty").textContent=p.difficulty;
+ $("routeRisk").textContent=p.risk+" risk";
+ $("reportTitle").textContent=p.name;
+ $("reportClass").textContent=p.risk.toUpperCase();
+ $("reportLocation").textContent=p.building+", "+p.floor;
+ $("reportFacilities").textContent=p.facilities;
+ $("reportTime").textContent=p.time;
+ toast("Destination selected: "+p.name);
+}
+$("searchInput").addEventListener("input",renderPlaces);
+$("searchBtn").addEventListener("click",renderPlaces);
+$("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")renderPlaces()});
+document.querySelectorAll(".chip").forEach(chip=>chip.addEventListener("click",()=>{
+ selectedCategory=chip.dataset.category;
+ document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c===chip));
+ renderPlaces();
+}));
+document.querySelectorAll(".map-tab").forEach(tab=>tab.addEventListener("click",()=>{
+ document.querySelectorAll(".map-tab").forEach(t=>t.classList.toggle("active",t===tab));
+ $("demoMap").classList.toggle("satellite",tab.dataset.map==="satellite");
+ toast(tab.dataset.map==="satellite"?"Satellite-style DEMO view enabled.":"Illustrative map view enabled.");
+}));
+
+function makeReport(p){
+ return '<div class="result-box"><div class="eyebrow">CLIB / DEMO REPORT / '+p.id.toUpperCase()+'</div>'+
+ '<div class="classification">'+escapeHTML(p.name)+'</div>'+
+ '<p><b>Classification:</b> '+p.risk+' risk (fictional rating)</p>'+
+ '<p><b>Category:</b> '+escapeHTML(p.category)+'</p>'+
+ '<p><b>Reference location:</b> '+escapeHTML(p.building)+', '+escapeHTML(p.floor)+'</p>'+
+ '<p><b>Facilities:</b> '+escapeHTML(p.facilities)+'</p>'+
+ '<p><b>Recommended timing:</b> '+escapeHTML(p.time)+'</p>'+
+ '<p><b>Walking estimate:</b> '+p.walk+' minutes (made-up demo estimate)</p>'+
+ '<hr style="border-color:#34465d"><p>'+escapeHTML(p.note)+'</p>'+
+ '<p style="color:#efbd69;font-size:11px">DEMO DATA ONLY. Verify real locations and routes independently.</p></div>'+
+ '<button class="btn full" id="copyReportBtn">Copy Report Text</button>';
+}
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function reportText(p){
+ return "CLIB DEMO INTELLIGENCE REPORT\n"+p.name+"\nClassification: "+p.risk+" (fictional)\nCategory: "+p.category+"\nLocation: "+p.building+", "+p.floor+"\nFacilities: "+p.facilities+"\nTiming: "+p.time+"\nWalking estimate: "+p.walk+" minutes (fictional)\n\n"+p.note+"\n\nDEMO DATA ONLY. Not a verified campus map or official university report.";
+}
+function bindCopyReport(p){
+ const btn=$("copyReportBtn");if(!btn)return;
+ btn.addEventListener("click",()=>copyText(reportText(p)));
+}
+$("fullReportBtn").addEventListener("click",()=>{
+ openModal("Campus Intelligence Report",makeReport(currentReport));bindCopyReport(currentReport);
+});
+$("routeBtn").addEventListener("click",()=>{
+ const p=selectedPlace;
+ openModal("Operation: Locate Destination",
+  '<p>This simulated mission briefing has been prepared for your selected destination.</p>'+
+  makeReport(p)+'<p class="small-muted">No GPS, live tracking, route calculation, or location permission is used.</p>');
+ bindCopyReport(p);
+});
+$("missionBtn").addEventListener("click",()=>{
+ openModal("CLIB Mission Statement",
+  '<div class="result-box"><div class="classification">OPERATION: CAMPUS SURVIVAL</div>'+
+  '<p>Mission objective: help students find places, plan their campus journeys, and avoid unnecessary confusion.</p>'+
+  '<p>Strategic priorities:</p><ol><li>Locate the destination.</li><li>Verify the real-world route.</li><li>Arrive before the lecturer asks who came late.</li></ol>'+
+  '<p style="color:#efbd69">Our motto: Locate. Navigate. Survive.</p></div>'+
+  '<p>CLIB is a parody concept. Its fictional intelligence division has never been cleared for actual national security work.</p>'+
+  '<button class="btn full" id="missionDirectory">Begin Demo Mission →</button>');
+ $("missionDirectory").addEventListener("click",()=>{closeModal();$("directory").scrollIntoView({behavior:"smooth"})});
+});
+
+const packageDetails={
+ "Basic Reconnaissance":{price:"₦2,500",items:["One simulated location briefing","A basic route-planning checklist","A certificate of not being completely lost"],fine:"No actual guided navigation is included."},
+ "Advanced Campus Intelligence":{price:"₦15,000",items:["Detailed fictional location reports","Imaginary crowd analysis","Optimal timing recommendations","A digital report that looks important"],fine:"Crowd data and estimates are illustrative, not live."},
+ "Executive Lost-Student Recovery":{price:"₦75,000",items:["Executive mock briefing","Priority access to imaginary analysts","A personalized survival classification","Four unnecessary forms"],fine:"No physical recovery, escort, or real support service is provided."},
+ "National Emergency Navigation":{price:"₦250,000",items:["Emergency response simulation","VIP fictional mission report","A pretend 24/7 support designation","A ceremonial certificate of direction"],fine:"This is comedy, not an emergency service. Do not rely on CLIB for urgent help."}
+};
+function showPackage(name){
+ const p=packageDetails[name];if(!p)return;
+ openModal(name,
+  '<div class="result-box"><div class="eyebrow">FICTIONAL SERVICE PACKAGE</div>'+
+  '<div class="classification">'+p.price+'</div><p>'+escapeHTML(name)+'</p><ul>'+
+  p.items.map(x=>'<li>'+escapeHTML(x)+'</li>').join("")+'</ul></div>'+
+  '<p>'+escapeHTML(p.fine)+'</p>'+
+  '<p><b>Package status:</b> A parody product. No payment is accepted, and no booking is created.</p>'+
+  '<button class="btn full" id="packageCopy">Copy Package Details</button>');
+ $("packageCopy").addEventListener("click",()=>copyText(name+" — "+p.price+"\n"+p.items.join("\n")+"\nFICTIONAL PARODY SERVICE. No booking or payment."));
+}
+document.querySelectorAll(".packageBtn").forEach(btn=>btn.addEventListener("click",()=>showPackage(btn.dataset.package)));
+$("compareBtn").addEventListener("click",()=>{
+ const rows=Object.entries(packageDetails).map(([name,p])=>"<tr><td>"+escapeHTML(name)+"</td><td style='color:#efbd69;font-weight:bold'>"+p.price+"</td><td>Fictional</td></tr>").join("");
+ openModal("Premium Package Comparison",
+  '<p>Choose your preferred level of unnecessary bureaucracy.</p>'+
+  '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr><th style="text-align:left;padding:8px">Package</th><th style="text-align:left;padding:8px">Price</th><th style="text-align:left;padding:8px">Status</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+  '<p class="small-muted">All listed services and prices are fictional. This is not a checkout or payment page.</p>');
+});
+
+$("assessmentForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const skill=Number($("navSkill").value),late=Number($("lateness").value),asking=Number($("asking").value);
+ const raw=late+asking+(3-skill);
+ const score=Math.round(raw/9*100);
+ let title,text;
+ if(score<20){title="Chief Navigation Officer";text="You know where you're going. CLIB recommends that you stop giving unsolicited directions to everyone else."}
+ else if(score<43){title="Low-Risk Navigator";text="You can probably find your destination with minimal drama. Keep verifying unfamiliar routes."}
+ else if(score<67){title="Geographically Confused Individual";text="Your confidence sometimes exceeds your sense of direction. Consider checking the route before setting off."}
+ else if(score<85){title="Level 4: Campus Navigation Emergency";text="You may have walked past the same building three times. Ask a reliable person for directions before committing to a fourth lap."}
+ else{title="Level 5: National Campus Incident";text="CLIB recommends immediate consultation with a real campus map or trusted campus staff. The bureau has deployed a metaphorical rescue team."}
+ $("resultTitle").textContent=title;
+ $("resultScore").textContent="Simulated confusion index: "+score+"%";
+ $("scoreFill").style.width=score+"%";
+ $("resultText").textContent=text;
+ $("assessmentResult").style.display="block";
+ $("assessmentResult").scrollIntoView({behavior:"smooth",block:"nearest"});
+ $("copyResult").onclick=()=>copyText("CLIB STUDENT SURVIVAL ASSESSMENT\nClassification: "+title+"\nSimulated confusion index: "+score+"%\n"+text+"\nFor entertainment only.");
+});
+
+function copyText(text){
+ if(navigator.clipboard&&navigator.clipboard.writeText){
+  navigator.clipboard.writeText(text).then(()=>toast("Copied successfully.")).catch(()=>fallbackCopy(text));
+ }else fallbackCopy(text);
+}
+function fallbackCopy(text){
+ const ta=document.createElement("textarea");ta.value=text;
+ ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);
+ ta.select();
+ try{document.execCommand("copy");toast("Copied successfully.");}
+ catch(e){openModal("Copy your text",'<textarea id="manualCopy"></textarea><p>Automatic copying is unavailable. Select and copy the text above.</p>');$("manualCopy").value=text;}
+ ta.remove();
+}
+
+$("menuToggle").addEventListener("click",()=>{
+ const links=$("navlinks");links.classList.toggle("open");
+ $("menuToggle").setAttribute("aria-expanded",String(links.classList.contains("open")));
+});
+document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>$("navlinks").classList.remove("open")));
+
+renderPlaces();
+selectPlace(places[0]);
+</script>
+</body>
+</html>
